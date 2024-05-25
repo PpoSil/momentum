@@ -11,8 +11,14 @@ function onLoginSubmit(e) {
   // classList: classList 중 하나를 사용하여 class를 추가하거나 제거 가능
   loginForm.classList.add("hidden");
   console.log(username);
+  localStorage.setItem("username", username);
   greeting.innerText = `Hello ${username}`;
   greeting.classList.remove("hidden");
 }
 
 loginForm.addEventListener("submit", onLoginSubmit);
+
+// 브라우저에서 공짜로 기억할 수 있게 해주는 기능의 API = localStorage
+// 정보 저장: setItem("key", "value")
+// 정보 호출: getItem("key")
+// 정보 삭제: removeItem("key")
