@@ -8,7 +8,7 @@ const USERNAME_KEY = "username";
 
 function onLoginSubmit(e) {
   // dir:객체의 속성이나 DOM 요소의 구조 확인 가능 -> console.dir(*)
-  e.preventDefault();
+  // e.preventDefault();
   // classList: classList 중 하나를 사용하여 class를 추가하거나 제거 가능
   loginForm.classList.add(HIDDEN_CLASSNAME);
   const username = loginInput.value;
