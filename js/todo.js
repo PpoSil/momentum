@@ -13,35 +13,43 @@ function saveTodos() {
 
 function deleteTodo(e) {
   const li = e.target.parentElement;
+  console.log(typeof li.id);
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
   li.remove();
+  saveTodos();
 }
 
-function paintTodo(toDo) {
+function paintTodo(newTodo) {
   // li와 span 생성
-  const todoLi = document.createElement("li");
-  const todoSpan = document.createElement("span");
-  const todoBtn = document.createElement("button");
+  const li = document.createElement("li");
+  li.id = newTodo.id;
+  const span = document.createElement("span");
+  const btn = document.createElement("button");
 
-  todoSpan.innerText = toDo;
-  todoBtn.innerText = "❌";
+  // newTodo쓰는 이유 -> newTodo는 paintTodo함수의 newTodoObj의 인자로 받아온 객체이기 때문
+  span.innerText = newTodo.text;
+  btn.innerText = "❌";
 
-  todoBtn.addEventListener("click", deleteTodo);
+  btn.addEventListener("click", deleteTodo);
 
   // li 안에 span 넣기
-  todoLi.appendChild(todoSpan);
-  todoLi.appendChild(todoBtn);
+  li.appendChild(span);
+  li.appendChild(btn);
 
   // todoList안에 li넣기
-  todoList.appendChild(todoLi);
+  todoList.appendChild(li);
 }
 
 function onTodoSubmit(e) {
   e.preventDefault();
-  console.dir(todoInput.value);
   const newTodo = todoInput.value;
   todoInput.value = "";
-  toDos.push(newTodo);
-  paintTodo(newTodo);
+  const newTodoObj = {
+    id: Date.now(),
+    text: newTodo,
+  };
+  toDos.push(newTodoObj);
+  paintTodo(newTodoObj);
   saveTodos();
 }
 
@@ -53,7 +61,6 @@ function sayHello(item) {
 
 // localStorage(str로 저장됨)에 있는 todos는 현재 "["a","b","c"]" 형태로 저장되어 있음
 const savedTodos = localStorage.getItem("todos");
-console.log(savedTodos);
 
 if (savedTodos) {
   // JSON.parse(@@@): str을 자바스크립트 객체로 변환 -> arr로 변환

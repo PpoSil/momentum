@@ -8,7 +8,5 @@ const bgImage = document.createElement("img");
 // src 속성에 이미지 경로 추가
 bgImage.src = `img/${chosenImage}`;
 
-console.log(bgImage);
-
 // appendChild() -> body에 html 요소 추가
 document.body.appendChild(bgImage);

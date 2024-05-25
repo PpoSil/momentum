@@ -14,7 +14,6 @@ function onLoginSubmit(e) {
   const username = loginInput.value;
   localStorage.setItem(USERNAME_KEY, username);
   paintGreetings(savedUsername);
-  console.log("제출 시 유저네임 ", username);
 }
 
 // 브라우저에서 기억할 수 있게 해주는 기능의 API = localStorage
@@ -34,5 +33,4 @@ if (savedUsername === null) {
   loginForm.addEventListener("submit", onLoginSubmit);
 } else {
   paintGreetings(savedUsername);
-  console.log("제출 후 유저네임 ", savedUsername);
 }
