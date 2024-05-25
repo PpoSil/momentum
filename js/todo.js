@@ -3,9 +3,11 @@ const todoInput = document.querySelector("#todo-form input");
 const todoList = document.getElementById("todo-list");
 
 // todo가 저장될 배열 생성
-const toDos = [];
+let toDos = [];
 
 function saveTodos() {
+  // localStorage에는 arr 형태로 저장 불가능 -> JSON.stringify()로 str로 변환 후 저장
+  // JSON.stringify(@@@): 자바스크립트 객체나 array or any js code를 str으로 변환
   localStorage.setItem("todos", JSON.stringify(toDos));
 }
 
@@ -45,4 +47,17 @@ function onTodoSubmit(e) {
 
 todoForm.addEventListener("submit", onTodoSubmit);
 
-// JSON.stringify(@@@): 자바스크립트 객체나 array or any js code를 str으로 변환
+function sayHello(item) {
+  console.log("this is the turn of ", item);
+}
+
+// localStorage(str로 저장됨)에 있는 todos는 현재 "["a","b","c"]" 형태로 저장되어 있음
+const savedTodos = localStorage.getItem("todos");
+console.log(savedTodos);
+
+if (savedTodos) {
+  // JSON.parse(@@@): str을 자바스크립트 객체로 변환 -> arr로 변환
+  const parsedTodos = JSON.parse(savedTodos);
+  toDos = parsedTodos;
+  parsedTodos.forEach(paintTodo);
+}
