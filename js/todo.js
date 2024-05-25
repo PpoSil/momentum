@@ -2,6 +2,13 @@ const todoForm = document.getElementById("todo-form");
 const todoInput = document.querySelector("#todo-form input");
 const todoList = document.getElementById("todo-list");
 
+// todo가 저장될 배열 생성
+const toDos = [];
+
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(toDos));
+}
+
 function deleteTodo(e) {
   const li = e.target.parentElement;
   li.remove();
@@ -31,7 +38,11 @@ function onTodoSubmit(e) {
   console.dir(todoInput.value);
   const newTodo = todoInput.value;
   todoInput.value = "";
+  toDos.push(newTodo);
   paintTodo(newTodo);
+  saveTodos();
 }
 
 todoForm.addEventListener("submit", onTodoSubmit);
+
+// JSON.stringify(@@@): 자바스크립트 객체나 array or any js code를 str으로 변환
